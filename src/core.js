@@ -2,6 +2,8 @@ import {List, Map} from 'immutable'
 
 export const setEntries = (state, entries) => state.set('entries', List(entries))
 
+export const INITIAL_STATE = Map()
+
 export const next = (state) => {
   const entries = state.get('entries').concat(getWinners(state.get('vote')))
 
@@ -16,9 +18,9 @@ export const next = (state) => {
   })
 }
 
-export const vote = (state, entry) => {
-  return state.updateIn(
-    ['vote', 'tally', entry],
+export const vote = (voteState, entry) => {
+  return voteState.updateIn(
+    ['tally', entry],
     (tally = 0) => tally + 1
   )
 }
